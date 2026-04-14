@@ -1,14 +1,17 @@
-<script type="module">
+<script>
+!function(){
 const slp = function(ms){return new Promise((resolve,reject)=>setTimeout(resolve,ms))}
 const url = new URL(location.href)
 const u_p = new URLSearchParams(location.search)
-const rsp = await fetch(`./json_url.json?${crypto.randomUUID().replace(/-/g,"").substr(0,8)}`)
+const ftu = `./json_url.json?${crypto.randomUUID().replace(/-/g,"").substr(0,8)}`
+const rsp = await fetch(ftu)
 const ujs = await rsp.json()
 const upp = u_p.getAll("url").length === 1 
   ? u_p.get("url").split(/\\\/\x1f\\\//gi) /*%5C%2F%1F%5C%2F*/
   : u_p.getAll("url");
 const reu = upp.reduce((acc, cur) => acc?.[cur], ujs)
 const bdy = function(d){document.body.innerHTML=`<p>お待ち下さい... ${d?"("+d+")":""}</p>`}
+console.log(url,u_p,ftu,rsp,ujs,upp,reu)
 bdy()
 for (let i=10;i>=0;i--){
   await slp(1000)
@@ -22,4 +25,5 @@ setTimeout(() => {
     globalThis.location.replace(reu);
   }
 },0);
+}()
 </script>
