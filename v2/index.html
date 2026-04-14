@@ -5,11 +5,14 @@ const fuc = `./config.json?${dte}`
 try{
 const cfg = await fetch(fuc)
 const cjs = await cfg.json()
+}
 const config = {
   dataurl:cjs.datapath??"./data.json",
   paramsKey:cjs.paramskey??"url",
-  delimiter:new RegExp(cjs.delimiter)??/\\\/\x1f\\\//gi /*%5C%2F%1F%5C%2F*/
-}
+  delimiter:new RegExp(cjs.delimiter)??/\\\/\x1f\\\//gi, /*%5C%2F%1F%5C%2F*/
+  loadSecond:Number(cjs.loadTimeSec)??10,
+  loadtimeInterval:Number(cjs.loadInterSec)??1,
+  defaultloadScreenMessage:cjs.defaultScreenMsg??"お待ち下さい..."
 }
 const slp = function(ms){return new Promise((resolve,reject)=>setTimeout(resolve,ms))}
 const url = new URL(location.href)
@@ -21,11 +24,11 @@ const upp = u_p.getAll(config.paramsKey).length === 1
   ? u_p.get(config.paramsKey).split(config.delimiter)
   : u_p.getAll(config.paramsKey);
 const reu = upp.reduce((acc, cur) => acc?.[cur], ujs)
-const bdy = function(d){document.body.innerHTML=`<p>お待ち下さい... ${d?"("+d+")":""}</p>`}
+const bdy = function(d){document.body.innerHTML=`<p>${config.defaultloadScreenMessage} ${d?"("+d+")":""}</p>`}
 console.log(url,u_p,ftu,rsp,ujs,upp,reu)
 bdy()
-for (let i=10;i>=0;i--){
-  await slp(1000)
+for (let i=config.loadSecond;i>=0;i--){
+  await slp(config.loadtimeInterval)
   bdy(String(i))
 }
   
