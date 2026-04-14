@@ -6,7 +6,7 @@ let cfg,cjs
 try{
 cfg = await fetch(fuc)
 cjs = await cfg.json()
-}catch(e){null}
+}catch(e){cjs={}}
 const config = {
   dataurl:cjs.datapath??"./data.json",
   paramsKey:cjs.paramskey??"url",
