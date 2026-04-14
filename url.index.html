@@ -2,11 +2,11 @@
   !async function(){
     let __p,jso
     try{
-      __p=await fetch("../configuration/latest_redirect_v1.json")
+      __p=await fetch("./configuration/latest_redirect_v1.json")
       jso=await __p.json()
     }catch(e){jso={}}
     const cnf={
-      latestPath:jso.latest??"../"
+      latestPath:jso.latest??"./"
     }
     setTimeout(()=>{
       globalThis.location.replace(cnf.latestPath+location.search)
