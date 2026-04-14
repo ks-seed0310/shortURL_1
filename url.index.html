@@ -9,10 +9,10 @@ const upp = u_p.getAll("url").length === 1
 const reu = upp.reduce((acc, cur) => acc?.[cur], ujs)
 document.body.innerHTML = "お待ち下さい..."
 setTimeout(() => {
-  if (reu) {
+  if (reu && reu.startsWith("data:")) {
+    document.body.innerHTML = `<img src="${reu}" style="max-width:100%;">`;
+  } else if (reu) {
     globalThis.location.replace(reu);
-  } else {
-    document.body.innerHTML = "エラー: 遷移先が見つかりませんでした。";
   }
-}, 5000)
+}, 5000);
 </script>
