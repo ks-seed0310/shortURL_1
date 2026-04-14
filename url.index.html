@@ -1,4 +1,18 @@
 <script>
-  const u=new URL(location.href)
-  const u_p=new URLSearchParams(location.href)
+const url = new URL(location.href)
+const u_p = new URLSearchParams(location.search)
+const rsp = await fetch("./_url.json")
+const ujs = await rsp.json()
+const upp = u_p.getAll("url").length === 1 
+  ? u_p.get("url").split(/\\\/\x1f\\\//gi) 
+  : u_p.getAll("url");
+const reu = upp.reduce((acc, cur) => acc?.[cur], ujs)
+document.body.innerHTML = "お待ち下さい..."
+setTimeout(() => {
+  if (reu) {
+    globalThis.location.replace(reu);
+  } else {
+    document.body.innerHTML = "エラー: 遷移先が見つかりませんでした。";
+  }
+}, 5000)
 </script>
