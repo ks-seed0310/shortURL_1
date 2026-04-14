@@ -29,7 +29,7 @@ const bdy = function(d){document.body.innerHTML=`<p>${config.defaultloadScreenMe
 console.log(url,u_p,ftu,rsp,ujs,upp,reu)
 bdy()
 for (let i=config.loadSecond;i>=0;i--){
-  await slp(config.loadtimeInterval)
+  await slp(config.loadtimeInterval*1000)
   bdy(String(i))
 }
   
