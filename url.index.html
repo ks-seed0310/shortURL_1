@@ -6,7 +6,7 @@
       jso=await __p.json()
     }catch(e){jso={}}
     const cnf={
-      latestPath:jso.latest.replace(/\.\.//,"./")??"./"
+      latestPath:jso.latest.replace(/\.\.\//,"./")??"./"
     }
     setTimeout(()=>{
       globalThis.location.replace(cnf.latestPath+location.search)
