@@ -1,6 +1,8 @@
 <script>
 !async function(){
-const fuc = `./config.json?${crypto.randomUUID().replace(/-/g,"").substr(0,8)}`
+const dte = new Date().getTime()
+const fuc = `./config.json?${dte}`
+try{
 const cfg = await fetch(fuc)
 const cjs = await cfg.json()
 const config = {
@@ -8,10 +10,11 @@ const config = {
   paramsKey:cjs.paramskey??"url",
   delimiter:new RegExp(cjs.delimiter)??/\\\/\x1f\\\//gi /*%5C%2F%1F%5C%2F*/
 }
+}
 const slp = function(ms){return new Promise((resolve,reject)=>setTimeout(resolve,ms))}
 const url = new URL(location.href)
 const u_p = new URLSearchParams(location.search)
-const ftu = `${config.dataurl}${crypto.randomUUID().replace(/-/g,"").substr(0,8)}`
+const ftu = `${config.dataurl}${dte}`
 const rsp = await fetch(ftu)
 const ujs = await rsp.json()
 const upp = u_p.getAll(config.paramsKey).length === 1 
