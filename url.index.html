@@ -1,4 +1,5 @@
 <script type="module">
+const slp = function(ms){return new Promise((resolve,reject)=>setTimeout(resolve,ms))}
 const url = new URL(location.href)
 const u_p = new URLSearchParams(location.search)
 const rsp = await fetch("./json_url.json")
@@ -7,12 +8,18 @@ const upp = u_p.getAll("url").length === 1
   ? u_p.get("url").split(/\\\/\x1f\\\//gi) /*%5C%2F%1F%5C%2F*/
   : u_p.getAll("url");
 const reu = upp.reduce((acc, cur) => acc?.[cur], ujs)
-document.body.innerHTML = "お待ち下さい..."
+const bdy = function(d){document.body.innerHTML=`<p>お待ち下さい... ${d?"("+d+")":""}</p>`}
+bdy()
+for (let i=10;i>=0;i--){
+  await slp(1000)
+  bdy(String(i))
+}
+  
 setTimeout(() => {
   if (reu && reu.startsWith("data:")) {
     document.body.innerHTML = `<img src="${reu}" style="max-width:100%;">`;
   } else if (reu) {
     globalThis.location.replace(reu);
   }
-}, 5000);
+},0);
 </script>
