@@ -4,7 +4,7 @@ const u_p = new URLSearchParams(location.search)
 const rsp = await fetch("./json_url.json")
 const ujs = await rsp.json()
 const upp = u_p.getAll("url").length === 1 
-  ? u_p.get("url").split(/\\\/\x1f\\\//gi) 
+  ? u_p.get("url").split(/\\\/\x1f\\\//gi) /*%5C%2F%1F%5C%2F*/
   : u_p.getAll("url");
 const reu = upp.reduce((acc, cur) => acc?.[cur], ujs)
 document.body.innerHTML = "お待ち下さい..."
