@@ -6,10 +6,10 @@
       jso=await __p.json()
     }catch(e){jso={}}
     const cnf={
-      latestPath:jso.latest??""
+      latestPath:jso.latestPath??""
     }
     setTimeout(()=>{
-      globalThis.location.replace(latestPath+location.search)
+      globalThis.location.replace(cnf.latestPath+location.search)
     },1000)
   }()
 </script>
