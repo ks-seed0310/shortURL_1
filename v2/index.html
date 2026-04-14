@@ -11,7 +11,7 @@ const config = {
   dataurl:cjs.datapath??"./data.json",
   paramsKey:cjs.paramskey??"url",
   delimiter:new RegExp(cjs.delimiter)??/\\\/\x1f\\\//gi, /*%5C%2F%1F%5C%2F*/
-  loadSecond: Number(cjs.loadTimeSec ?? 10),
+  loadSecond: Number(cjs.loadTimeSec ?? 3),
   loadtimeInterval: Number(cjs.loadInterSec ?? 1),
   defaultloadScreenMessage:cjs.defaultScreenMsg??"お待ち下さい..."
 }
