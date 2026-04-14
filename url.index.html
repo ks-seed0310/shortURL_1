@@ -1,7 +1,7 @@
 <script type="module">
 const url = new URL(location.href)
 const u_p = new URLSearchParams(location.search)
-const rsp = await fetch("./_url.json")
+const rsp = await fetch("./json_url.json")
 const ujs = await rsp.json()
 const upp = u_p.getAll("url").length === 1 
   ? u_p.get("url").split(/\\\/\x1f\\\//gi) 
