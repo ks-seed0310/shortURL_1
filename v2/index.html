@@ -2,10 +2,11 @@
 !async function(){
 const dte = new Date().getTime()
 const fuc = `./config.json?${dte}`
+let cfg,cjs
 try{
-const cfg = await fetch(fuc)
-const cjs = await cfg.json()
-}
+cfg = await fetch(fuc)
+cjs = await cfg.json()
+}catch(e){null}
 const config = {
   dataurl:cjs.datapath??"./data.json",
   paramsKey:cjs.paramskey??"url",
