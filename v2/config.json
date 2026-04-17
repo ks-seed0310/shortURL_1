@@ -1,3 +1,4 @@
 {
-  "delimiter":"\x1f/"
+  "delimiter":"/\x1f\//gi",
+  "delimiter_comment":"%1F/"
 }
