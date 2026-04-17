@@ -1,4 +1,4 @@
 {
   "delimiter":"\\x1f",
-  "delimiter_comment":"%1F/"
+  "delimiter_comment":"%1F"
 }
